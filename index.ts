@@ -3,46 +3,55 @@ import Jimp = require("jimp");
 async function create(rightText: string) {
 
     const mmd = await Jimp.read("./mmd.png");
-    const red = Jimp.rgbaToInt(188, 0, 0, 255);
-    const black = Jimp.rgbaToInt(0, 0, 0, 255);
     const font = await Jimp.loadFont("./font/impact.fnt");
-    const textLeft = new Jimp(600, 40)
-        .print(font, 0, 0, "TEST ALLIANCE PLEASE")
-        .invert();
+    const black = Jimp.rgbaToInt(0, 0, 0, 255);
+    const width = 600;
+    const textHeight = 60;
+    const bannerHeight = 100;
+    const blueRadius = 1;
+    const textLeft = new Jimp(width, textHeight)
+        .print(font, 10, 10, "TEST ALLIANCE PLEASE")
+        .invert()
+        .scan(0, 0, width, textHeight, function(x, y, idx) {
+            const colIn = Jimp.intToRGBA(this.getPixelColor(x, y));
+            this.setPixelColor(Jimp.rgbaToInt(colIn.r, colIn.g, colIn.b, colIn.a * (1-(colIn.r + colIn.g + colIn.b)/(255 * 3))), x, y);
+        });
     const leftCopy = textLeft.clone()
-        .blur(2)
-        .scan(0, 0, 600, 40, function(x, y, idx) {
+        .blur(blueRadius)
+        .scan(0, 0, width, textHeight, function(x, y, idx) {
             if (Jimp.intToRGBA(this.getPixelColor(x, y)).a > 0) {
                 this.setPixelColor(black, x, y);
             }
-        })
-        .autocrop();
+        });
     textLeft.invert();
-    leftCopy.composite(textLeft, 0, 0);
+    leftCopy.composite(textLeft, blueRadius, 0);
 
-    const textRight = new Jimp(600, 40)
-        .print(font, 0, 0, rightText.toUpperCase())
-        .invert();
+    const textRight = new Jimp(width, textHeight)
+        .print(font, 10, 10, rightText.toUpperCase())
+        .invert()
+        .scan(0, 0, width, textHeight, function(x, y, idx) {
+            const colIn = Jimp.intToRGBA(this.getPixelColor(x, y));
+            this.setPixelColor(Jimp.rgbaToInt(colIn.r, colIn.g, colIn.b, colIn.a * (1-(colIn.r + colIn.g + colIn.b)/(255 * 3))), x, y);
+        });
     const rightCopy = textRight.clone()
-        .blur(2)
-        .scan(0, 0, 600, 40, function(x, y, idx) {
+        .blur(blueRadius)
+        .scan(0, 0, width, textHeight, function(x, y, idx) {
             if (Jimp.intToRGBA(this.getPixelColor(x, y)).a > 0) {
                 this.setPixelColor(black, x, y);
             }
-        })
-        .autocrop();
+        });
     textRight.invert()
-        .scan(0, 0, 600, 40, function(x, y, idx) {
+        .scan(0, 0, width, textHeight, function(x, y, idx) {
             const inCol = Jimp.intToRGBA(this.getPixelColor(x, y));
             this.setPixelColor(Jimp.rgbaToInt(inCol.r * (188/255), 0, 0, inCol.a), x, y);
         });
-    rightCopy.composite(textRight, 0, 0);
+    rightCopy.composite(textRight, blueRadius, 0);
 
 
-    return new Jimp(600, 100)
-        .blit(mmd.scaleToFit(600, 100), 0, 0)
-        .composite(leftCopy, 70, 69)
-        .composite(rightCopy, 290, 69)
+    return new Jimp(width, bannerHeight)
+        .blit(mmd.scaleToFit(width, bannerHeight), 0, 0)
+        .composite(leftCopy, 60, textHeight)
+        .composite(rightCopy, 280, textHeight)
         .write("./out.png");
 }
 create("make header memes").then(() => void 0, m => console.log(m));
