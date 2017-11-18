@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
         "lib": [
-            "es6"
-        ]
-    }
+            "es6", "dom"
+        ],
+        "allowJs": true
+    },
+    "include": [
+        "./*.ts"
+    ]
 }

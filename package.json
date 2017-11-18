@@ -5,16 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --watch index.ts --exec ts-node index.ts"
+    "build": "tsc && browserify -t brfs -e index.js -o dist/bundle.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/node": "^8.0.53",
-    "jimp": "oliver-moran/jimp"
-  },
+  "license": "MIT",
   "devDependencies": {
-    "nodemon": "^1.12.1",
+    "@types/node": "^8.0.53",
+    "brfs": "^1.4.3",
+    "browserify": "^14.5.0",
+    "jimp": "oliver-moran/jimp",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
   }

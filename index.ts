@@ -1,8 +1,7 @@
-import Jimp = require("jimp");
+/// <reference types="jimp" />
 
 async function create(rightText: string) {
-
-    const mmd = await Jimp.read("./mmd.png");
+    const mmd = await Jimp.read(require("fs").readFileSync("./mmd.png"));
     const font = await Jimp.loadFont("./font/impact.fnt");
     const black = Jimp.rgbaToInt(0, 0, 0, 255);
     const width = 600;
@@ -48,10 +47,23 @@ async function create(rightText: string) {
     rightCopy.composite(textRight, blueRadius, 0);
 
 
-    return new Jimp(width, bannerHeight)
+    const img = new Jimp(width, bannerHeight)
         .blit(mmd.scaleToFit(width, bannerHeight), 0, 0)
         .composite(leftCopy, 60, textHeight)
-        .composite(rightCopy, 280, textHeight)
-        .write("./out.png");
+        .composite(rightCopy, 280, textHeight);
+    
+    return await (new Promise<Buffer>((resolve, reject) => img.getBuffer(Jimp.MIME_PNG, (err, buf) => err ? reject(err) : resolve(buf))));
 }
-create("make header memes").then(() => void 0, m => console.log(m));
+
+const q: {
+    <K extends keyof ElementTagNameMap>(selectors: K): ElementTagNameMap[K] | null;
+    <E extends Element = Element>(selectors: string): E | null;
+} = x => document.querySelector(x);
+
+window.addEventListener("load", () => {
+    q("#gen").addEventListener("mousedown", e => {
+        const image = create((q("#redtext") as HTMLInputElement).value).then(buf => {
+            (q("#result") as HTMLImageElement).src = `data:image/png;base64,${buf.toString("base64")}`;
+        });
+    });
+});
