@@ -1,0 +1,21 @@
+{
+  "name": "tapimmd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon --watch index.ts --exec ts-node index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^8.0.53",
+    "jimp": "oliver-moran/jimp"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  }
+}
