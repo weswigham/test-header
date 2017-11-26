@@ -1,9 +1,10 @@
 import Jimp = require("jimp");
+import path = require("path");
 
 export async function create(rightText: string) {
 
-    const mmd = await Jimp.read("./mmd.png");
-    const font = await Jimp.loadFont("./font/impact.fnt");
+    const mmd = await Jimp.read(path.join(__dirname, "./mmd.png"));
+    const font = await Jimp.loadFont(path.join(__dirname, "./font/impact.fnt"));
     const black = Jimp.rgbaToInt(0, 0, 0, 255);
     const width = 600;
     const textHeight = 60;

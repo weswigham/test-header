@@ -36,15 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Jimp = require("jimp");
+var path = require("path");
 function create(rightText) {
     return __awaiter(this, void 0, void 0, function () {
         var mmd, font, black, width, textHeight, bannerHeight, blueRadius, textLeft, leftCopy, textRight, rightCopy;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, Jimp.read("./mmd.png")];
+                case 0: return [4 /*yield*/, Jimp.read(path.join(__dirname, "./mmd.png"))];
                 case 1:
                     mmd = _a.sent();
-                    return [4 /*yield*/, Jimp.loadFont("./font/impact.fnt")];
+                    return [4 /*yield*/, Jimp.loadFont(path.join(__dirname, "./font/impact.fnt"))];
                 case 2:
                     font = _a.sent();
                     black = Jimp.rgbaToInt(0, 0, 0, 255);
