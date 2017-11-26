@@ -8,6 +8,7 @@ module.exports = function (context, req) {
             context.log("Result egnerated for "+text);
             context.res = {
                 body: buf,
+                isRaw: true,
                 headers: {
                     "Content-Type": "image/png"
                 }
