@@ -1,4 +1,4 @@
-const { getPNG } = require("./bannergen.js");
+const { getPNG } = require("./bannergen/index.js");
 module.exports = function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
