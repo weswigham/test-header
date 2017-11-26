@@ -1,0 +1,16 @@
+{
+  "name": "get-header",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bannergen": "./bannergen",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  }
+}

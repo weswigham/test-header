@@ -1,5 +1,5 @@
 {
-  "name": "tapimmd",
+  "name": "bannergen",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,15 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon --watch index.ts --exec ts-node index.ts"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Wesley Wigham",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^8.0.53",
-    "jimp": "oliver-moran/jimp"
-  },
-  "devDependencies": {
-    "nodemon": "^1.12.1",
+    "jimp": "oliver-moran/jimp",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
