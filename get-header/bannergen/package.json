@@ -8,14 +8,5 @@
     "watch": "nodemon --watch index.ts --exec ts-node index.ts"
   },
   "author": "Wesley Wigham",
-  "license": "MIT",
-  "dependencies": {
-    "@types/node": "^8.0.53",
-    "jimp": "oliver-moran/jimp",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.6.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.12.1"
-  }
+  "license": "MIT"
 }
