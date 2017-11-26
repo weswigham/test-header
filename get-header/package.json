@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.1",
-    "ts-node": "^3.3.0",
     "typescript": "^2.6.1",
     "@types/node": "^8.0.53"
   }
