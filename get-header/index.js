@@ -5,7 +5,7 @@ module.exports = function (context, req) {
     if (req.query.text || (req.body && req.body.text)) {
         const text = req.query.text || req.body.text;
         getPNG(text).then(buf => {
-            console.log("Result egnerated for "+text);
+            context.log("Result egnerated for "+text);
             context.res = {
                 body: buf,
                 headers: {
@@ -18,7 +18,7 @@ module.exports = function (context, req) {
                 status: 500,
                 body: "Internal Server Error"
             };
-            console.log(err);
+            context.log(err);
             context.done()
         })
 
