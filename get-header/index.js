@@ -12,6 +12,13 @@ module.exports = function (context, req) {
                 }
             };
             context.done();
+        }).catch(err => {
+            context.res = {
+                status: 500,
+                body: "Internal Server Error"
+            };
+            console.log(err);
+            context.done()
         })
 
     }
