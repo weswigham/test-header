@@ -1,6 +1,6 @@
 import Jimp = require("jimp");
 
-async function create(rightText: string) {
+export async function create(rightText: string) {
 
     const mmd = await Jimp.read("./mmd.png");
     const font = await Jimp.loadFont("./font/impact.fnt");
@@ -51,7 +51,29 @@ async function create(rightText: string) {
     return new Jimp(width, bannerHeight)
         .blit(mmd.scaleToFit(width, bannerHeight), 0, 0)
         .composite(leftCopy, 60, textHeight)
-        .composite(rightCopy, 280, textHeight)
-        .write("./out.png");
+        .composite(rightCopy, 280, textHeight);
 }
-create("make header memes").then(() => void 0, m => console.log(m));
+
+export async function write(rightText: string, filePath = "./out.png") {
+    return (await create(rightText)).write(filePath);
+} 
+
+// write("make header memes").then(() => void 0, m => console.log(m));
+export async function getPNG(rightText: string) {
+    let resolve: Function;
+    let reject: Function;
+    const resultPromise = new Promise<Buffer>((res, rej) => {
+        resolve = res;
+        reject = rej;
+    });
+    (await create(rightText))
+        .getBuffer("image/png", (err, buf) => {
+            if (err) {
+                return reject(err);
+            }
+            else {
+                return resolve(buf);
+            }
+        });
+    return await resultPromise;
+}
