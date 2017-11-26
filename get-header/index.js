@@ -1,4 +1,4 @@
-require("ts-node/register");
+require("ts-node").register(require("./tsconfig.json").compilerOptions);
 const { getPNG } = require("./bannergen");
 module.exports = function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
